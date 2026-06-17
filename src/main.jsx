@@ -197,7 +197,7 @@ function App() {
           </div>
           <p className="hero-lede">
             I build practical internal systems with strong database design, reliable backend workflows,
-            and React interfaces shaped around real business operations.
+            and React/Angular interfaces shaped around real business operations to achieve maximum impact.
           </p>
           <div className="hero-actions">
             <a href="#personal-projects"><Globe2 size={18} /> Personal Work</a>
@@ -245,7 +245,7 @@ function App() {
         <SectionHeader
           kicker="Personal Projects"
           title="Focused portfolio systems"
-          text="Compact workflow demos with live links kept behind icon actions."
+          text=""
         />
         <div className="project-grid">
           {personalProjects.map((project) => {
