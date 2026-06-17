@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   ArrowUpRight,
@@ -15,7 +15,10 @@ import {
   Globe2,
   Layers3,
   Link as LinkIcon,
+  Linkedin,
+  Mail,
   Network,
+  Phone,
   ServerCog,
   ShieldCheck,
   Users,
@@ -30,6 +33,24 @@ const skills = [
   ["Databases", Database, ["SQL Server", "SSMS", "MongoDB Atlas"]],
   ["Infrastructure & Tools", Network, ["RabbitMQ", "SignalR", "Cloudinary", "JWT/RBAC", "Git", "XAMPP", "Claude Code", "Canva"]],
   ["Professional Strengths", Users, ["Systems architecture", "Requirements analysis", "Bug diagnosis", "Team leadership", "Analytical thinking"]],
+];
+
+const contactLinks = [
+  {
+    label: "markvigo32@gmail.com",
+    href: "mailto:markvigo32@gmail.com",
+    icon: Mail,
+  },
+  {
+    label: "0907 223 6045",
+    href: "tel:+639072236045",
+    icon: Phone,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://ph.linkedin.com/in/vigo-mark-bernard-p-95047a3a6",
+    icon: Linkedin,
+  },
 ];
 
 const personalProjects = [
@@ -131,12 +152,49 @@ function SectionHeader({ kicker, title, text }) {
 }
 
 function App() {
+  const [isContactBarVisible, setIsContactBarVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const hero = document.querySelector(".hero");
+      const triggerPoint = hero ? hero.offsetHeight - 110 : 520;
+      setIsContactBarVisible(window.scrollY > triggerPoint);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <main className="page-shell">
+      <aside className={`contact-bar ${isContactBarVisible ? "is-visible" : ""}`} aria-label="Contact information">
+        <div className="contact-bar-inner">
+          <a className="contact-name" href="#hero-title">Mark Vigo</a>
+          <div className="contact-items">
+            {contactLinks.map(({ label, href, icon: Icon }) => (
+              <a href={href} key={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noreferrer" : undefined}>
+                <Icon size={16} aria-hidden="true" />
+                <span>{label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </aside>
+
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-copy">
           <p className="kicker">Full-stack developer / systems architect</p>
           <h1 id="hero-title">Mark Vigo</h1>
+          <div className="contact-strip" aria-label="Contact information">
+            {contactLinks.map(({ label, href, icon: Icon }) => (
+              <a href={href} key={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noreferrer" : undefined}>
+                <Icon size={17} aria-hidden="true" />
+                <span>{label}</span>
+              </a>
+            ))}
+          </div>
           <p className="hero-lede">
             I build practical internal systems with strong database design, reliable backend workflows,
             and React interfaces shaped around real business operations.
