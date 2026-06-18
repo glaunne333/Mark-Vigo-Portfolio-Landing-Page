@@ -52,6 +52,11 @@ const contactLinks = [
     href: "https://ph.linkedin.com/in/vigo-mark-bernard-p-95047a3a6",
     icon: Linkedin,
   },
+  {
+    label: "GitHub",
+    href: "https://github.com/glaunne333",
+    icon: Github,
+  },
 ];
 
 const personalProjects = [
@@ -173,7 +178,19 @@ function App() {
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    const observer = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((entry) => {
+          entry.target.classList.toggle("is-visible", entry.isIntersecting);
+        }),
+      { threshold: 0.08 }
+    );
+    document.querySelectorAll(".panel, .client-card").forEach((element) => observer.observe(element));
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   return (
@@ -205,10 +222,15 @@ function App() {
             ))}
           </div>
           <p className="hero-lede">
-            I build practical internal systems with strong database design, reliable backend workflows,
-            and React/Angular interfaces shaped around real business operations to achieve maximum impact.
+            I've shipped production internal systems at Cubed Technologies: a 30-table employee portal
+            with real-time SignalR infrastructure, and a RabbitMQ-backed IT helpdesk that replaced
+            manual email coordination entirely. I architect for reliability: strong schemas, auditable
+            workflows, and backends that hold up under real business load.
           </p>
           <div className="hero-actions">
+            <a href="https://drive.google.com/uc?export=download&id=1AvG4kJ6uAW2knpl0tZuYneYJJBiOpaqN" target="_blank" rel="noreferrer">
+              <FileText size={18} /> Download CV
+            </a>
             <a href="#personal-projects"><Globe2 size={18} /> Personal Work</a>
             <a href="#client-projects"><BriefcaseBusiness size={18} /> Client Work</a>
           </div>
@@ -315,7 +337,7 @@ function App() {
         <div className="footer-links">
           <a href="#skills"><Code2 size={17} /> Skills</a>
           <a href="#personal-projects"><LinkIcon size={17} /> Projects</a>
-          <a href="#client-projects"><Github size={17} /> Portfolio</a>
+          <a href="https://github.com/glaunne333" target="_blank" rel="noreferrer"><Github size={17} /> GitHub</a>
         </div>
       </footer>
     </main>

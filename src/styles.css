@@ -82,6 +82,12 @@ svg {
   white-space: nowrap;
 }
 
+.contact-name:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
 .contact-items,
 .contact-strip {
   display: flex;
@@ -300,6 +306,19 @@ h1 {
   border-radius: var(--radius);
   background: var(--panel);
   box-shadow: var(--shadow);
+}
+
+.panel,
+.client-card {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 380ms ease, transform 380ms ease;
+}
+
+.panel.is-visible,
+.client-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .card-title,
