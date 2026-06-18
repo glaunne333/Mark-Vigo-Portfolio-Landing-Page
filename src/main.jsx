@@ -21,6 +21,7 @@ import {
   Phone,
   ServerCog,
   ShieldCheck,
+  ShoppingCart,
   Users,
   Workflow,
 } from "lucide-react";
@@ -77,6 +78,14 @@ const personalProjects = [
     summary:
       "Internal asset custody and inventory demo covering registration, assignment, return, repair, closure, audit logging, and archive review.",
     tags: ["Inventory", "Audit logs", "Custody"],
+  },
+  {
+    name: "ShopPulse",
+    url: "https://shop-pulse-five.vercel.app/",
+    icon: ShoppingCart,
+    summary:
+      "Ecommerce analytics dashboard built with Angular and Tailwind, using mock store data to visualize revenue trends, product performance, recent orders, customer segments, and conversion metrics without a backend or authentication.",
+    tags: ["Angular", "Analytics", "Ecommerce"],
   },
 ];
 
